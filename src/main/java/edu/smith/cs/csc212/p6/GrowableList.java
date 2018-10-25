@@ -1,5 +1,7 @@
 package edu.smith.cs.csc212.p6;
 
+import edu.smith.cs.csc212.p6.errors.BadIndexError;
+import edu.smith.cs.csc212.p6.errors.EmptyListError;
 import edu.smith.cs.csc212.p6.errors.P6NotImplemented;
 
 public class GrowableList<T> implements P6List<T> {
@@ -19,17 +21,36 @@ public class GrowableList<T> implements P6List<T> {
 
 	@Override
 	public T removeBack() {
-		throw new P6NotImplemented();
+		if (this.size() == 0) {
+			throw new EmptyListError();
+		}
+		T value = this.getIndex(fill-1);
+		fill--;
+		this.array[fill] = null;
+		return value;
 	}
 
 	@Override
 	public T removeIndex(int index) {
-		throw new P6NotImplemented();
+		if (this.size() == 0) {
+			throw new EmptyListError();
+		}
+		T removed = this.getIndex(index);
+		fill--;
+		for (int i=index; i<fill; i++) {
+			this.array[i] = this.array[i+1];
+		}
+		this.array[fill] = null;
+		return removed;
 	}
 
 	@Override
 	public void addFront(T item) {
-		throw new P6NotImplemented();
+		for (int i=fill; i<0; i--) {
+			array[i] = array[i-1];
+		}
+		array[0] = item;
+		fill++;
 	}
 
 	@Override
@@ -43,16 +64,26 @@ public class GrowableList<T> implements P6List<T> {
 
 	@Override
 	public void addIndex(T item, int index) {
-		throw new P6NotImplemented();
+		for (int i=fill; i>index; i--) {
+			array[i] = array[i-1];
+		}
+		array[index] = item;
+		fill++;
 	}
 	
 	@Override
 	public T getFront() {
+		if (this.fill==0) {
+			throw new EmptyListError();
+		}
 		return this.getIndex(0);
 	}
 
 	@Override
 	public T getBack() {
+		if (this.fill==0) {
+			throw new EmptyListError();
+		}
 		return this.getIndex(this.fill-1);
 	}
 
@@ -64,6 +95,9 @@ public class GrowableList<T> implements P6List<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public T getIndex(int index) {
+		if (index < 0 || index >= fill) {
+			throw new BadIndexError();
+		}
 		return (T) this.array[index];
 	}
 

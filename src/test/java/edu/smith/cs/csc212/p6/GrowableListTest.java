@@ -11,33 +11,33 @@ import edu.smith.cs.csc212.p6.errors.RanOutOfSpaceError;
 public class GrowableListTest {
 	@Test
 	public void testEmpty() {
-		P6List<String> data = new FixedSizeList<String>(0);
+		P6List<String> data = new GrowableList<String>();
 		Assert.assertEquals(0, data.size());
-		data = new FixedSizeList<String>(32);
+		data = new GrowableList<String>();
 		Assert.assertEquals(0, data.size());
 	}
 	
 	@Test (expected=EmptyListError.class)
 	public void testRemoveFrontCrash() {
-		P6List<String> data = new FixedSizeList<String>(4);
+		P6List<String> data = new GrowableList<String>();
 		data.removeFront();
 	}
 	
 	@Test(expected=EmptyListError.class)
 	public void testRemoveBackCrash() {
-		P6List<String> data = new FixedSizeList<String>(4);
+		P6List<String> data = new GrowableList<String>();
 		data.removeBack();
 	}
 	
 	@Test(expected=EmptyListError.class)
 	public void testRemoveIndexCrash() {
-		P6List<String> data = new FixedSizeList<String>(4);
+		P6List<String> data = new GrowableList<String>();
 		data.removeIndex(3);
 	}
 
 	@Test
 	public void testAddToFront() {
-		P6List<String> data = new FixedSizeList<String>(4);
+		P6List<String> data = new GrowableList<String>();
 		data.addFront("1");
 		Assert.assertEquals(1, data.size());
 		Assert.assertEquals("1", data.getIndex(0));
@@ -59,7 +59,7 @@ public class GrowableListTest {
 	
 	@Test
 	public void testAddToBack() {
-		P6List<String> data = new FixedSizeList<String>(4);
+		P6List<String> data = new GrowableList<String>();
 		data.addBack("1");
 		Assert.assertEquals(1, data.size());
 		Assert.assertEquals("1", data.getIndex(0));
@@ -84,7 +84,7 @@ public class GrowableListTest {
 	 * @return
 	 */
 	public P6List<String> makeFullList() {
-		P6List<String> data = new FixedSizeList<String>(4);
+		P6List<String> data = new GrowableList<String>();
 		data.addBack("a");
 		data.addBack("b");
 		data.addBack("c");
@@ -152,7 +152,7 @@ public class GrowableListTest {
 	public void testIsEmpty() {
 		P6List<String> data = makeFullList();
 		Assert.assertEquals(false, data.isEmpty());
-		P6List<String> data2 = new FixedSizeList<String>(0);
+		P6List<String> data2 = new GrowableList<String>();
 		Assert.assertEquals(true, data2.isEmpty());
 	}
 	
@@ -170,7 +170,7 @@ public class GrowableListTest {
 	
 	@Test(expected=EmptyListError.class)
 	public void testGetFrontCrash() {
-		P6List<String> data = new FixedSizeList<String>(0);
+		P6List<String> data = new GrowableList<String>();
 		data.getFront();
 	}
 	
@@ -188,7 +188,7 @@ public class GrowableListTest {
 	
 	@Test(expected=EmptyListError.class)
 	public void testGetBackCrash() {
-		P6List<String> data = new FixedSizeList<String>(0);
+		P6List<String> data = new GrowableList<String>();
 		data.getBack();
 	}
 	
