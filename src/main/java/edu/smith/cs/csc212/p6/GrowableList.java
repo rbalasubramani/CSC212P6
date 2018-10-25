@@ -14,7 +14,7 @@ public class GrowableList<T> implements P6List<T> {
 
 	@Override
 	public T removeFront() {
-		throw new P6NotImplemented();
+		return removeIndex(0);
 	}
 
 	@Override

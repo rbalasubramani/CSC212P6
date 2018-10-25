@@ -1,14 +1,14 @@
 package edu.smith.cs.csc212.p6;
 
 import org.junit.Test;
+import org.junit.Assert;
 
 import edu.smith.cs.csc212.p6.errors.BadIndexError;
 import edu.smith.cs.csc212.p6.errors.EmptyListError;
 import edu.smith.cs.csc212.p6.errors.RanOutOfSpaceError;
 
-import org.junit.Assert;
 
-public class FixedSizeListTest {
+public class GrowableListTest {
 	@Test
 	public void testEmpty() {
 		P6List<String> data = new FixedSizeList<String>(0);
@@ -17,7 +17,7 @@ public class FixedSizeListTest {
 		Assert.assertEquals(0, data.size());
 	}
 	
-	@Test(expected=EmptyListError.class)
+	@Test (expected=EmptyListError.class)
 	public void testRemoveFrontCrash() {
 		P6List<String> data = new FixedSizeList<String>(4);
 		data.removeFront();
@@ -197,5 +197,5 @@ public class FixedSizeListTest {
 		P6List<String> data = makeFullList();
 		data.getIndex(5);
 	}
-}
 
+}
